@@ -8,61 +8,87 @@ const FONT_WEIGHTS = {
 };
 
 const renderText = (text, className, baseWeight = 400) => {
-  return [...text].map((char, i) => (
-    <span
-      key={i}
-      className={`${className} inline-block`} // inline-block ayuda a que las transformaciones funcionen mejor
-      style={{ fontVariationSettings: `'wght' ${baseWeight}` }} // CORREGIDO: Comillas en 'wght'
-    >
-      {/* Si es un espacio, usamos \u00A0 (non-breaking space) para que no colapse */}
-      {char === " " ? "\u00A0" : char}
+  return (
+    <span aria-label={text} role="text">
+      {[...text].map((char, i) => (
+        <span
+          key={i}
+          aria-hidden="true"
+          // NOTA: Quitamos 'will-change-transform' porque animamos fuentes, no transformaciones.
+          // 'inline-block' es vital para que funcione el width/height en los cálculos.
+          className={`${className} inline-block`} 
+          style={{ fontVariationSettings: `'wght' ${baseWeight}` }}
+        >
+          {char === " " ? "\u00A0" : char}
+        </span>
+      ))}
     </span>
-  ));
+  );
 };
 
 const setupTextHover = (container, type) => {
-  if (!container) return;
+  // Guard clause: si no hay contenedor, devolvemos limpieza vacía para evitar errores
+  if (!container) return () => {};
 
-  const letters = container.querySelectorAll("span");
+  const letters = container.querySelectorAll("span[aria-hidden='true']");
   const { min, max } = FONT_WEIGHTS[type];
+  
+  let letterData = [];
 
-  const animateLetters = (letter, weight, duration = 0.25) => {
-   
+  const calculatePositions = () => {
+    // Calculamos esto UNA vez.
+    const { left: containerLeft } = container.getBoundingClientRect();
+    
+    letterData = Array.from(letters).map((letter) => {
+      const { left, width } = letter.getBoundingClientRect();
+      return {
+        element: letter,
+        // Al guardar 'center' relativo al contenedor, la matemática es más simple luego
+        center: left - containerLeft + width / 2 
+      };
+    });
+  };
+
+  // Inicializar posiciones
+  calculatePositions();
+
+  const animateLetters = (letter, weight) => {
     gsap.to(letter, {
-      duration,
+      duration: 0.25,
       ease: "power2.out",
       fontVariationSettings: `'wght' ${weight}`,
+      overwrite: "auto",
     });
   };
 
   const handleMouseMove = (e) => {
-    // getBoundingClientRect es costoso, idealmente sácalo fuera si el layout no cambia, 
-    // pero para este efecto está bien aquí.
+    // Aquí sí necesitamos getBoundingClientRect del contenedor para saber dónde está el mouse
+    // relativo a él. Esto es barato (1 sola lectura por frame vs 20 lecturas).
     const { left } = container.getBoundingClientRect();
     const mouseX = e.clientX - left;
 
-    letters.forEach((letter) => {
-      const { left: l, width: w } = letter.getBoundingClientRect();
-      // Calculamos distancia desde el centro de la letra
-      const distance = Math.abs(mouseX - (l - left + w / 2));
-      // Ajusta el divisor (2000) si quieres que el efecto sea más ancho o angosto
-      const intensity = Math.exp(-(distance ** 2) / 2500); 
-
-      animateLetters(letter, min + (max - min) * intensity);
+    letterData.forEach(({ element, center }) => {
+      const distance = Math.abs(mouseX - center);
+      // Ajuste de intensidad: 2500 controla el radio de dispersión del efecto
+      const intensity = Math.exp(-(distance ** 2) / 2500);
+      const newWeight = min + (max - min) * intensity;
+      
+      animateLetters(element, newWeight);
     });
   };
 
-
-  // Resetear al salir el mouse (Opcional pero recomendado para que no se quede trabado)
   const handleMouseLeave = () => {
-      letters.forEach((letter) => animateLetters(letter, FONT_WEIGHTS[type].default));
+    letterData.forEach(({ element }) => 
+      animateLetters(element, FONT_WEIGHTS[type].default)
+    );
   };
 
+  window.addEventListener("resize", calculatePositions);
   container.addEventListener("mousemove", handleMouseMove);
   container.addEventListener("mouseleave", handleMouseLeave);
 
-  // CORREGIDO: Devolvemos una función de limpieza
   return () => {
+    window.removeEventListener("resize", calculatePositions);
     container.removeEventListener("mousemove", handleMouseMove);
     container.removeEventListener("mouseleave", handleMouseLeave);
   };
@@ -73,29 +99,27 @@ const Welcome = () => {
   const subtitleRef = useRef(null);
 
   useGSAP(() => {
-    // Guardamos las funciones de limpieza
     const cleanupTitle = setupTextHover(titleRef.current, "title");
     const cleanupSubtitle = setupTextHover(subtitleRef.current, "subtitle");
 
-    // useGSAP ejecutará esto cuando el componente se desmonte
     return () => {
-      if (cleanupTitle) cleanupTitle();
-      if (cleanupSubtitle) cleanupSubtitle();
+      cleanupTitle();
+      cleanupSubtitle();
     };
-  }, []); // El array vacío está bien aquí
+  }, []);
 
   return (
     <section id="welcome" className="flex flex-col items-center justify-center h-screen">
-       {/* Nota: 'font-sans serif' en className es confuso. O usas font-sans O font-serif generalmente */}
-      <p ref={subtitleRef} className="cursor-default">
-        {renderText("Hola soy Alfredo Bienvenidos a mi", "text-3xl font-georama", 100)}
+      <p ref={subtitleRef} className="cursor-default text-3xl font-georama">
+        {renderText("Hola soy Alfredo Bienvenidos a mi", "", 100)}
       </p>
-      <h1 ref={titleRef} className="mt-7 cursor-default">
-        {renderText("Portfolio", "text-9xl italic font-georama", 400)}
-      </h1>
       
-      <div className="small-screen mt-10">
-        <p>Este Portfolio está diseñado para escritorio y tablet solamente</p>
+      <h1 ref={titleRef} className="mt-7 cursor-default text-9xl italic font-georama">
+        {renderText("Portfolio", "", 400)}
+      </h1>
+
+      <div className="lg:hidden mt-10 text-center px-4">
+        <p>Este Portfolio está diseñado para escritorio y tablet.</p>
       </div>
     </section>
   );
