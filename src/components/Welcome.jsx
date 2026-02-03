@@ -1,6 +1,8 @@
 import { useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import { useLanguageStore } from "#store/language.js";
+import { getTranslation } from "#constants/translations.js";
 
 const FONT_WEIGHTS = {
   subtitle: { min: 100, max: 400, default: 100 },
@@ -30,57 +32,68 @@ const setupTextHover = (container, type) => {
   // Guard clause: si no hay contenedor, devolvemos limpieza vacía para evitar errores
   if (!container) return () => {};
 
-  const letters = container.querySelectorAll("span[aria-hidden='true']");
+  const letters = Array.from(container.querySelectorAll("span[aria-hidden='true']"));
   const { min, max } = FONT_WEIGHTS[type];
-  
-  let letterData = [];
+
+  // centers of each letter (used as a fallback). Recomputed on resize.
+  let centers = [];
 
   const calculatePositions = () => {
-    // Calculamos esto UNA vez.
-    const { left: containerLeft } = container.getBoundingClientRect();
-    
-    letterData = Array.from(letters).map((letter) => {
-      const { left, width } = letter.getBoundingClientRect();
-      return {
-        element: letter,
-        // Al guardar 'center' relativo al contenedor, la matemática es más simple luego
-        center: left - containerLeft + width / 2 
-      };
+    centers = letters.map((letter) => {
+      const r = letter.getBoundingClientRect();
+      return r.left + r.width / 2;
     });
   };
 
-  // Inicializar posiciones
+  // Initialize centers
   calculatePositions();
 
-  const animateLetters = (letter, weight) => {
-    gsap.to(letter, {
-      duration: 0.25,
+  const animateLetters = (element, weight) => {
+    gsap.to(element, {
+      duration: 0.22,
       ease: "power2.out",
       fontVariationSettings: `'wght' ${weight}`,
       overwrite: "auto",
     });
   };
 
-  const handleMouseMove = (e) => {
-    // Aquí sí necesitamos getBoundingClientRect del contenedor para saber dónde está el mouse
-    // relativo a él. Esto es barato (1 sola lectura por frame vs 20 lecturas).
-    const { left } = container.getBoundingClientRect();
-    const mouseX = e.clientX - left;
+  const getHoveredLetterIndex = (clientX, clientY) => {
+    const el = document.elementFromPoint(clientX, clientY);
+    if (!el) return -1;
+    // climb up until we find an aria-hidden letter inside this container
+    let node = el;
+    while (node && node !== container) {
+      if (node.nodeType === 1 && node.getAttribute && node.getAttribute('aria-hidden') === 'true') {
+        return letters.indexOf(node);
+      }
+      node = node.parentNode;
+    }
+    // fallback: find nearest by precomputed centers
+    let nearest = -1;
+    let bestDist = Infinity;
+    centers.forEach((c, i) => {
+      const d = Math.abs(c - clientX);
+      if (d < bestDist) { bestDist = d; nearest = i; }
+    });
+    return nearest;
+  };
 
-    letterData.forEach(({ element, center }) => {
-      const distance = Math.abs(mouseX - center);
-      // Ajuste de intensidad: 2500 controla el radio de dispersión del efecto
-      const intensity = Math.exp(-(distance ** 2) / 2500);
+  const handleMouseMove = (e) => {
+    const hoveredIndex = getHoveredLetterIndex(e.clientX, e.clientY);
+    if (hoveredIndex === -1) return;
+
+    // Use index distance to compute intensity — stable vs layout shifts
+    const sigma = 2; // controls spread
+    letters.forEach((el, i) => {
+      const idxDist = Math.abs(i - hoveredIndex);
+      const intensity = Math.exp(-(idxDist ** 2) / (2 * sigma * sigma));
       const newWeight = min + (max - min) * intensity;
-      
-      animateLetters(element, newWeight);
+      animateLetters(el, newWeight);
     });
   };
 
   const handleMouseLeave = () => {
-    letterData.forEach(({ element }) => 
-      animateLetters(element, FONT_WEIGHTS[type].default)
-    );
+    letters.forEach((el) => animateLetters(el, FONT_WEIGHTS[type].default));
   };
 
   window.addEventListener("resize", calculatePositions);
@@ -97,6 +110,10 @@ const setupTextHover = (container, type) => {
 const Welcome = () => {
   const titleRef = useRef(null);
   const subtitleRef = useRef(null);
+  const language = useLanguageStore((state) => state.language);
+  const welcomeSubtitle = getTranslation(language, "welcomeSubtitle");
+  const welcomeTitle = getTranslation(language, "welcomeTitle");
+  const desktopOnly = getTranslation(language, "desktopOnly");
 
   useGSAP(() => {
     const cleanupTitle = setupTextHover(titleRef.current, "title");
@@ -111,15 +128,15 @@ const Welcome = () => {
   return (
     <section id="welcome" className="flex flex-col items-center justify-center h-screen">
       <p ref={subtitleRef} className="cursor-default text-3xl font-georama">
-        {renderText("Hola soy Alfredo Bienvenidos a mi", "", 100)}
+        {renderText(welcomeSubtitle, "", 100)}
       </p>
       
       <h1 ref={titleRef} className="mt-7 cursor-default text-9xl italic font-georama">
-        {renderText("Portfolio", "", 400)}
+        {renderText(welcomeTitle, "", 400)}
       </h1>
 
       <div className="lg:hidden mt-10 text-center px-4">
-        <p>Este Portfolio está diseñado para escritorio y tablet.</p>
+        <p>{desktopOnly}</p>
       </div>
     </section>
   );

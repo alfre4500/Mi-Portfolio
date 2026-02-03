@@ -1,13 +1,16 @@
 import { useRef } from "react";
-import { dockApps } from "#constants/index.js";
 import { Tooltip } from "react-tooltip";
-import "react-tooltip/dist/react-tooltip.css"; // <--- FALTA IMPORTANTE 1
+import "react-tooltip/dist/react-tooltip.css";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import { useWindowStore } from "#store/window.js";
+import { useWindowStore } from "../store/window.js";
+import { useLanguageStore } from "#store/language.js";
+import { getTranslation } from "#constants/translations.js";
 
 const Dock = () => {
   const {openWindow , closeWindow , windows } = useWindowStore () ;
+  const language = useLanguageStore((state) => state.language);
+  const dockApps = getTranslation(language, "dockApps");
   const dockRef = useRef(null);
 
   useGSAP(() => {
@@ -95,21 +98,21 @@ const Dock = () => {
   return (
     <section id="dock">
       <div ref={dockRef} className="dock-container">
-        {dockApps.map(({ id, name, icon, canOpen }) => (
+        {dockApps.map(({ id, name, tooltip, icon, canOpen }) => (
           <div key={id} className="relative flex justify-center">
             <button
               type="button"
               className="dock-icon origin-bottom shrink-0" 
-              aria-label={name}
+              aria-label={tooltip || name}
               data-tooltip-id="dock-tooltip"
-              data-tooltip-content={name}
+              data-tooltip-content={tooltip || name}
               data-tooltip-delay-show={150}
               disabled={!canOpen}
               onClick={() => toggleApp(id, canOpen)}
             >
               <img
                 src={`/images/${icon}`}
-                alt={name}
+                alt={tooltip || name}
                 loading="lazy"
                 // Añadí transition-opacity para que no parpadee al cambiar opacidad
                 className={`w-full h-full transition-opacity ${canOpen ? "" : "opacity-60"}`}

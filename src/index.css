@@ -2,6 +2,26 @@
 
 @import "tailwindcss";
 
+/* Light Mode */
+:root {
+  --bg-primary: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+  --bg-secondary: rgba(255, 255, 255, 0.7);
+  --text-primary: #000000;
+  --text-secondary: #666666;
+  --border-color: #e0e0e0;
+  --header-bg: rgba(255, 255, 255, 0.8);
+}
+
+/* Dark Mode */
+:root.dark {
+  --bg-primary: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);
+  --bg-secondary: rgba(30, 30, 30, 0.7);
+  --text-primary: #ffffff;
+  --text-secondary: #b0b0b0;
+  --border-color: #444444;
+  --header-bg: rgba(30, 30, 30, 0.8);
+}
+
 html,
 body {
   width: 100dvw;
@@ -11,13 +31,26 @@ body {
   background-size:cover ;
   background-repeat: no-repeat;
   background-position: center;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
+
+/* No overlay in light mode - keep wallpaper as-is so text remains readable per user preference */
+/* (previously used an overlay here; removed to preserve original wallpaper in light mode) */
 
 @theme {
   --font-georama: "Georama", sans-serif;
   --font-roboto: "Roboto Mono", monospace;
   --breakpoint-3xl: 1920px;
 }
+
+/* Dark-mode icon/logo inversion: make logo and top-bar icons white in dark theme */
+:root.dark nav img[alt="logo"],
+:root.dark .icon-hover img {
+  filter: invert(1) brightness(1.3) saturate(0.6);
+}
+
 
 @utility flex-center {
   @apply flex items-center justify-center;
@@ -34,10 +67,13 @@ body {
 @layer base {
   main {
     @apply w-dvw h-dvh overflow-hidden;
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
 
   nav {
-    @apply flex justify-between items-center bg-white/50 backdrop-blur-3xl p-2 px-5 select-none;
+    @apply flex justify-between items-center backdrop-blur-3xl p-2 px-5 select-none transition-colors duration-300;
+    background-color: var(--header-bg);
+    border-bottom: 1px solid var(--border-color);
    div {
       @apply flex items-center max-sm:w-full max-sm:justify-center gap-5;
 
@@ -51,11 +87,23 @@ body {
 
       p {
         @apply text-sm cursor-pointer hover:underline transition-all;
+        color: var(--text-primary);
       }
     }
 
     time {
-      @apply text-sm font-medium text-black;
+      @apply text-sm font-medium transition-colors duration-300;
+      color: var(--text-secondary);
+    }
+
+    .language-btn {
+      @apply px-3 py-1 rounded-md transition-colors text-sm font-medium cursor-pointer select-none;
+      color: var(--text-primary);
+      background-color: transparent;
+    }
+
+    .language-btn:hover {
+      background-color: var(--border-color);
     }
   }
 }
@@ -66,13 +114,20 @@ body {
   }
 
   #welcome {
-    @apply text-gray-200 flex flex-col justify-center items-center absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 select-none max-sm:h-screen max-sm:w-full max-sm:px-10;
+    @apply flex flex-col justify-center items-center absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 select-none max-sm:h-screen max-sm:w-full max-sm:px-10;
+    color: #ffffff;
+    transition: color 0.3s ease;
+  }
 
+  #welcome {
     .small-screen {
-      @apply sm:hidden m-7 bg-red-300/20 backdrop-blur-lg p-3 rounded-md absolute top-10;
+      @apply sm:hidden m-7 backdrop-blur-lg p-3 rounded-md absolute top-10;
+      background-color: var(--bg-secondary);
+      color: #ffffff;
 
       p {
-        @apply flex-1 text-[16px] text-center font-roboto text-gray-400;
+        @apply flex-1 text-[16px] text-center font-roboto;
+        color: inherit;
       }
     }
   }
@@ -81,20 +136,34 @@ body {
     @apply absolute bottom-5 left-1/2 -translate-x-1/2 z-50 select-none max-sm:hidden;
 
     .dock-container {
-      @apply bg-white/20 backdrop-blur-md rounded-3xl p-4 flex items-end gap-4 3xl:gap-6;
+      @apply backdrop-blur-md rounded-3xl p-4 flex items-end gap-4 3xl:gap-6 transition-colors duration-300;
+      background-color: var(--bg-secondary);
     }
 
     .tooltip {
-      @apply !py-1 !px-3 !w-fit !text-center !text-xs !rounded-md !bg-blue-200 !text-blue-900 !shadow-2xl;
+      @apply py-2! px-4! w-fit! text-center! text-xs! rounded-lg! shadow-2xl! font-medium! border! transition-colors duration-300;
+      background-color: rgba(0, 0, 0, 0.85);
+      color: white;
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    :root.light .tooltip {
+      background-color: rgba(50, 50, 50, 0.9);
     }
 
     .dock-icon {
-      @apply size-16 3xl:size-24 cursor-pointer flex-shrink-0 flex items-center justify-center;
+      @apply size-16 3xl:size-24 cursor-pointer shrink-0 flex items-center justify-center;
 
       img {
         @apply object-cover object-center;
       }
     }
+  }
+
+  :root.dark #dock .dock-container {
+    background-color: rgba(255, 255, 255, 0.18);
+    box-shadow: 0 6px 30px rgba(0,0,0,0.15);
+    border: 1px solid rgba(255,255,255,0.06);
   }
 
   #window-controls {
@@ -114,25 +183,35 @@ body {
   }
 
   #window-header {
-    @apply flex items-center justify-between px-4 py-3 rounded-t-lg bg-gray-50 border-b border-gray-200 select-none text-sm text-gray-400;
+    @apply flex items-center justify-between px-4 py-3 rounded-t-lg select-none text-sm transition-colors duration-300;
+    background-color: var(--bg-secondary);
+    border-bottom: 1px solid var(--border-color);
+    color: var(--text-secondary);
   }
 
   #safari {
-    @apply w-4xl absolute top-40 left-2/12 bg-white shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden;
+    @apply w-4xl absolute top-40 left-2/12 shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden transition-colors duration-300;
+    background-color: var(--bg-secondary);
 
     .search {
-      @apply flex items-center gap-3 w-2/3 bg-white border border-gray-300 rounded-lg px-3 py-2;
+      @apply flex items-center gap-3 w-2/3 border rounded-lg px-3 py-2 transition-colors duration-300;
+      background-color: var(--bg-secondary);
+      border-color: var(--border-color);
 
       input {
         @apply placeholder:text-gray-400;
+        background-color: transparent;
+        color: var(--text-primary);
       }
     }
 
     .blog {
-      @apply bg-white p-10 max-w-3xl mx-auto;
+      @apply p-10 max-w-3xl mx-auto transition-colors duration-300;
+      background-color: var(--bg-secondary);
 
       h2 {
-        @apply text-xl font-bold text-pink-600 mb-10;
+        @apply text-xl font-bold mb-10;
+        color: var(--text-primary);
       }
 
       .blog-post {
@@ -146,15 +225,18 @@ body {
           @apply col-span-10 space-y-3;
 
           p {
-            @apply text-xs text-gray-500;
+            @apply text-xs;
+            color: var(--text-secondary);
           }
 
           h3 {
-            @apply font-semibold text-base text-gray-800;
+            @apply font-semibold text-base;
+            color: var(--text-primary);
           }
 
           a {
-            @apply text-blue-600 text-xs hover:underline flex items-center gap-3;
+            @apply text-xs hover:underline flex items-center gap-3;
+            color: var(--text-primary);
           }
         }
       }
@@ -208,14 +290,17 @@ body {
   }
 
   #contact {
-    @apply max-w-2xl absolute top-60 left-5/12 bg-white shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden;
+    @apply max-w-2xl absolute top-60 left-5/12 shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden transition-colors duration-300;
+    background-color: var(--bg-secondary);
 
     h2 {
       @apply font-bold text-sm text-center w-full;
+      color: var(--text-primary);
     }
 
     h3 {
       @apply text-xl font-semibold;
+      color: var(--text-primary);
     }
 
     ul {

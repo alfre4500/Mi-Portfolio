@@ -1,9 +1,8 @@
 import { create } from 'zustand';
 import { immer } from 'zustand/middleware/immer';
-// 1. CORRECCIÓN DE RUTA (Asegúrate que esta ruta apunte a tu archivo real)
+
 import { WINDOW_CONFIG, INITIAL_Z_INDEX } from '../constants/index.js'; 
 
-// Quitamos el export default del final y dejamos este export const
 export const useWindowStore = create(immer((set) => ({
 
     windows: WINDOW_CONFIG,
@@ -40,3 +39,5 @@ export const useWindowStore = create(immer((set) => ({
         win.zIndex = state.nextzindex++;
     }),
 })));
+
+export default useWindowStore;

@@ -38,37 +38,43 @@ const navIcons = [
 const dockApps = [
   {
     id: "finder",
-    name: "Portfolio", // was "Finder"
+    name: "Portafolio",
+    tooltip: "Portafolio",
     icon: "finder.png",
     canOpen: true,
   },
   {
     id: "safari",
-    name: "Articles", // was "Safari"
+    name: "Artículos",
+    tooltip: "Artículos",
     icon: "safari.png",
     canOpen: true,
   },
   {
     id: "photos",
-    name: "Gallery", // was "Photos"
+    name: "Galería",
+    tooltip: "Galería",
     icon: "photos.png",
     canOpen: true,
   },
   {
     id: "contact",
-    name: "Contact", // or "Get in touch"
+    name: "Contacto",
+    tooltip: "Contacto",
     icon: "contact.png",
     canOpen: true,
   },
   {
     id: "terminal",
-    name: "Skills", // was "Terminal"
+    name: "Habilidades",
+    tooltip: "Habilidades",
     icon: "terminal.png",
     canOpen: true,
   },
   {
     id: "trash",
-    name: "Archive", // was "Trash"
+    name: "Archivo",
+    tooltip: "Archivo",
     icon: "trash.png",
     canOpen: false,
   },
@@ -218,31 +224,31 @@ export {
 const WORK_LOCATION = {
   id: 1,
   type: "work",
-  name: "Work",
+  name: "Trabajo",
   icon: "/icons/work.svg",
   kind: "folder",
   children: [
     // ▶ Project 1
-    {
-      id: 5,
-      name: "Nike Ecommerce Website Application",
-      icon: "/images/folder.png",
-      kind: "folder",
-      position: "top-10 left-5", // icon position inside Finder
-      windowPosition: "top-[5vh] left-5", // optional: Finder window position
-      children: [
+      {
+        id: 5,
+        name: "Sitio Web de Comercio Electrónico Nike",
+        icon: "/images/folder.png",
+        kind: "folder",
+        position: "top-10 left-5", // icon position inside Finder
+        windowPosition: "top-[5vh] left-5", // optional: Finder window position
+        children: [
         {
           id: 1,
-          name: "Nike Project.txt",
+          name: "Proyecto Nike.txt",
           icon: "/images/txt.png",
           kind: "file",
           fileType: "txt",
           position: "top-5 left-10",
           description: [
-            "The Nike eCommerce website is a sleek and modern platform designed for shopping the latest Nike collections.",
-            "Instead of a simple online store, it delivers an immersive experience with bold visuals, interactive product displays, and smooth navigation.",
-            "Think of it like walking into a flagship Nike store—but right from your phone or laptop.",
-            "It's built with Next.js and Tailwind, ensuring fast performance, responsive design, and a clean, premium look.",
+            "El sitio web de comercio electrónico de Nike es una plataforma elegante y moderna diseñada para comprar las últimas colecciones de Nike.",
+            "En lugar de una simple tienda en línea, ofrece una experiencia inmersiva con visuales audaces, pantallas de productos interactivas y navegación fluida.",
+            "Piénsalo como entrar en una tienda insignia de Nike, pero directamente desde tu teléfono o portátil.",
+            "Está construido con Next.js y Tailwind, asegurando un rendimiento rápido, diseño responsivo y una apariencia limpia y premium.",
           ],
         },
         {
@@ -278,7 +284,7 @@ const WORK_LOCATION = {
     // ▶ Project 2
     {
       id: 6,
-      name: "AI Resume Analyzer",
+      name: "Analizador de CV con IA",
       icon: "/images/folder.png",
       kind: "folder",
       position: "top-52 right-80",
@@ -286,16 +292,16 @@ const WORK_LOCATION = {
       children: [
         {
           id: 1,
-          name: "AI Resume Analyzer Project.txt",
+          name: "Proyecto Analizador de CV.txt",
           icon: "/images/txt.png",
           kind: "file",
           fileType: "txt",
           position: "top-5 right-10",
           description: [
-            "AI Resume Analyzer is a smart tool that helps you perfect your resume with instant feedback.",
-            "Instead of guessing what recruiters want, you get AI-powered insights on keywords, formatting, and overall impact.",
-            "Think of it like having a career coach—pointing out strengths, fixing weaknesses, and boosting your chances of landing interviews.",
-            "It's built with Next.js and Tailwind, so it runs fast, looks professional, and works seamlessly on any device.",
+            "Analizador de CV con IA es una herramienta inteligente que te ayuda a perfeccionar tu currículum con retroalimentación instantánea.",
+            "En lugar de adivinar qué quieren los reclutadores, obtén información impulsada por IA sobre palabras clave, formato e impacto general.",
+            "Piénsalo como tener un entrenador de carrera que señale fortalezas, corrija debilidades e impulse tus posibilidades de conseguir entrevistas.",
+            "Está construido con Next.js y Tailwind, por lo que se ejecuta rápido, se ve profesional y funciona sin problemas en cualquier dispositivo.",
           ],
         },
         {
@@ -331,7 +337,7 @@ const WORK_LOCATION = {
     // ▶ Project 3
     {
       id: 7,
-      name: "Food Delivery App",
+      name: "Aplicación de Entrega de Comida",
       icon: "/images/folder.png",
       kind: "folder",
       position: "top-10 left-80",
@@ -339,16 +345,16 @@ const WORK_LOCATION = {
       children: [
         {
           id: 1,
-          name: "Food Delivery App Project.txt",
+          name: "Proyecto Aplicación de Entrega.txt",
           icon: "/images/txt.png",
           kind: "file",
           fileType: "txt",
           position: "top-5 left-10",
           description: [
-            "Our Food Delivery App is a fast and convenient way to order meals from your favorite restaurants.",
-            "Instead of making calls or waiting in line, you can browse menus, customize orders, and track deliveries in real time.",
-            "Think of it like having your favorite restaurants in your pocket—ready to deliver anytime, anywhere.",
-            "It’s built with React Native, so it works smoothly on both iOS and Android with a clean, modern design.",
+            "Nuestra aplicación de entrega de comida es una forma rápida y conveniente de pedir comidas de tus restaurantes favoritos.",
+            "En lugar de hacer llamadas o esperar en la fila, puedes examinar menús, personalizar pedidos y rastrear entregas en tiempo real.",
+            "Piénsalo como tener tus restaurantes favoritos en tu bolsillo, listos para entregar en cualquier momento y lugar.",
+            "Está construido con React Native, por lo que funciona sin problemas en iOS y Android con un diseño limpio y moderno.",
           ],
         },
         {
@@ -386,7 +392,7 @@ const WORK_LOCATION = {
 const ABOUT_LOCATION = {
   id: 2,
   type: "about",
-  name: "About me",
+  name: "Acerca de mí",
   icon: "/icons/info.svg",
   kind: "folder",
   children: [
@@ -419,18 +425,18 @@ const ABOUT_LOCATION = {
     },
     {
       id: 4,
-      name: "about-me.txt",
+      name: "acerca-de-mí.txt",
       icon: "/images/txt.png",
       kind: "file",
       fileType: "txt",
       position: "top-60 left-5",
-      subtitle: "Meet the Developer Behind the Code",
+      subtitle: "Conoce al Desarrollador Detrás del Código",
       image: "/images/adrian.jpg",
       description: [
-        "Hey! I’m Adrian 👋, a web developer who enjoys building sleek, interactive websites that actually work well.",
-        "I specialize in JavaScript, React, and Next.js—and I love making things feel smooth, fast, and just a little bit delightful.",
-        "I’m big on clean UI, good UX, and writing code that doesn’t need a search party to debug.",
-        "Outside of dev work, you'll find me tweaking layouts at 2AM, sipping overpriced coffee, or impulse-buying gadgets I absolutely convinced myself I needed 😅",
+        "¡Hola! Soy Alfredo 👋, un desarrollador web que disfruta creando sitios web elegantes e interactivos que realmente funcionan bien.",
+        "Me especializo en JavaScript, React y Next.js, y me encanta que las cosas se sientan fluidas, rápidas y un poco deliciosas.",
+        "Soy un defensor de la UI limpia, la buena UX y escribo código que no necesita una partida de búsqueda para depurar.",
+        "Fuera del trabajo de desarrollo, me encontrarás ajustando diseños a las 2 AM, bebiendo café caro o comprando gadgets impulsivamente que me convencí a mí mismo de que necesitaba 😅",
       ],
     },
   ],
@@ -439,13 +445,13 @@ const ABOUT_LOCATION = {
 const RESUME_LOCATION = {
   id: 3,
   type: "resume",
-  name: "Resume",
+  name: "CV",
   icon: "/icons/file.svg",
   kind: "folder",
   children: [
     {
       id: 1,
-      name: "Resume.pdf",
+      name: "CV.pdf",
       icon: "/images/pdf.png",
       kind: "file",
       fileType: "pdf",
@@ -458,7 +464,7 @@ const RESUME_LOCATION = {
 const TRASH_LOCATION = {
   id: 4,
   type: "trash",
-  name: "Trash",
+  name: "Papelera",
   icon: "/icons/trash.svg",
   kind: "folder",
   children: [
