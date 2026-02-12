@@ -24,21 +24,21 @@ export const translations = {
       {
         id: "finder",
         name: "Portafolio",
-        tooltip: "Portafolio",
+        tooltip: "Proyectos",
         icon: "finder.png",
         canOpen: true,
       },
       {
         id: "safari",
         name: "Artículos",
-        tooltip: "Artículos",
+        tooltip: "Certificados",
         icon: "safari.png",
         canOpen: true,
       },
       {
         id: "photos",
         name: "Galería",
-        tooltip: "Galería",
+        tooltip: "Sobre mi",
         icon: "photos.png",
         canOpen: true,
       },
@@ -112,23 +112,23 @@ export const translations = {
     // Dock Apps
     dockApps: [
       {
-        id: "finder",
+        id: "resume",
         name: "Portfolio",
-        tooltip: "Portfolio",
+        tooltip: "Projects",
         icon: "finder.png",
         canOpen: true,
       },
       {
         id: "safari",
         name: "Articles",
-        tooltip: "Articles",
+        tooltip: "Certificates",
         icon: "safari.png",
         canOpen: true,
       },
       {
         id: "photos",
         name: "Gallery",
-        tooltip: "Gallery",
+        tooltip: "About me",
         icon: "photos.png",
         canOpen: true,
       },

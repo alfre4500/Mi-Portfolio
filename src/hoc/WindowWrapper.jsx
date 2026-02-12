@@ -64,7 +64,7 @@ const WindowWrapper = (Component, windowKey) => {
                 id={windowKey}
                 ref={ref}
                 style={{ zIndex }} 
-                className={`absolute ${!isOpen ? 'hidden' : ''}`}
+                className={`absolute ${!isOpen ? 'hidden' : ''} app-window`}
             >
                 <Component {...props} />
             </section>

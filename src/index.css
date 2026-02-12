@@ -6,6 +6,9 @@
 :root {
   --bg-primary: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
   --bg-secondary: rgba(255, 255, 255, 0.7);
+  /* Window-specific colors: opaque body and a stronger header */
+  --window-bg: #ffffff;
+  --window-header-bg: rgba(255, 255, 255, 0.98);
   --text-primary: #000000;
   --text-secondary: #666666;
   --border-color: #e0e0e0;
@@ -16,6 +19,9 @@
 :root.dark {
   --bg-primary: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);
   --bg-secondary: rgba(30, 30, 30, 0.7);
+  /* Window-specific colors for dark mode */
+  --window-bg: #0f0f0f;
+  --window-header-bg: rgba(30, 30, 30, 0.98);
   --text-primary: #ffffff;
   --text-secondary: #b0b0b0;
   --border-color: #444444;
@@ -27,8 +33,9 @@ body {
   width: 100dvw;
   overflow: hidden;
   height: 100dvh;
-  background-image: url("/images/wallpaper.jpg");
-  background-size:cover ;
+  /* Background image replaced by video. Keep color fallback. */
+  background-image: url("/images/FONDO.mp4");
+  background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
   background-color: var(--bg-primary);
@@ -189,9 +196,28 @@ body {
     color: var(--text-secondary);
   }
 
+  /* Background video element */
+  #bg-video,
+  .bg-video {
+    position: fixed;
+    inset: 0;
+    width: 100dvw;
+    height: 100dvh;
+    object-fit: cover;
+    z-index: -1;
+    pointer-events: none;
+  }
+
+  /* Default window background and border for all windows rendered via WindowWrapper */
+  .app-window {
+    background-color: var(--window-bg);
+    border: 1px solid var(--border-color);
+  }
+
   #safari {
     @apply w-4xl absolute top-40 left-2/12 shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden transition-colors duration-300;
-    background-color: var(--bg-secondary);
+    background-color: var(--window-bg);
+    border: 1px solid var(--border-color);
 
     .search {
       @apply flex items-center gap-3 w-2/3 border rounded-lg px-3 py-2 transition-colors duration-300;
@@ -244,7 +270,9 @@ body {
   }
 
   #terminal {
-    @apply w-xl absolute top-32 left-1/12 bg-white shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden;
+    @apply w-7xl absolute top-32 left-1/12 shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden;
+    background-color: var(--window-bg);
+    border: 1px solid var(--border-color);
 
     h2 {
       @apply font-bold text-sm text-center w-full;
@@ -254,7 +282,7 @@ body {
       @apply text-sm font-roboto p-5;
 
       .label {
-        @apply flex items-center ms-10 mt-7;
+        @apply flex items-center ms-10 mt-4;
       }
 
       .content {
@@ -289,6 +317,13 @@ body {
     }
   }
 
+  /* Make the terminal header visually stronger than the body */
+  #terminal #window-header {
+    background-color: var(--window-header-bg);
+    color: var(--text-primary);
+    border-bottom: 1px solid var(--border-color);
+  }
+
   #contact {
     @apply max-w-2xl absolute top-60 left-5/12 shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden transition-colors duration-300;
     background-color: var(--bg-secondary);
@@ -316,6 +351,49 @@ body {
         p {
           @apply font-semibold text-sm text-white;
         }
+      }
+    }
+  }
+
+  #resume {
+    @apply absolute top-24 right-32 shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden transition-colors duration-300;
+    background-color: var(--window-bg);
+    border: 1px solid var(--border-color);
+    width: 550px;
+    height: 650px;
+
+    #window-header {
+      @apply flex items-center justify-between px-4 py-3;
+      background-color: var(--window-header-bg);
+      color: var(--text-primary);
+      border-bottom: 1px solid var(--border-color);
+
+      h3 {
+        @apply text-sm font-medium m-0;
+      }
+
+      .download-icon {
+        @apply p-1 hover:bg-gray-200 rounded hover:cursor-pointer transition-colors;
+        color: var(--text-primary);
+        display: flex;
+        align-items: center;
+
+        &:hover {
+          background-color: var(--border-color);
+        }
+      }
+    }
+
+    .resume-pdf-viewer {
+      @apply h-full overflow-auto transition-colors duration-300;
+      background-color: var(--window-bg);
+
+      .react-pdf__Page {
+        @apply flex justify-center p-4;
+      }
+
+      canvas {
+        @apply rounded max-w-full;
       }
     }
   }

@@ -2,8 +2,10 @@ import dayjs from "dayjs";
 import { useLanguageStore } from "#store/language.js";
 import { useThemeStore } from "#store/theme.js";
 import { getTranslation } from "#constants/translations.js";
+import useWindowStore from "#store/window";
 
 const Navbar = () => {
+  const {openWindow} = useWindowStore();
   const language = useLanguageStore((state) => state.language);
   const toggleLanguage = useLanguageStore((state) => state.toggleLanguage);
   const theme = useThemeStore((state) => state.theme);
@@ -16,8 +18,8 @@ const Navbar = () => {
         <img src="/images/logo.svg" alt="logo" />
         <p className="font-bold">Alfredo Portfolio</p>
         <ul>
-          {navLinks.map(({ id, name }) => (
-            <li key={id}>
+          {navLinks.map(({ id, name , type }) => (
+            <li key={id} onClick={()=>openWindow(type) }>
               <p>{name}</p>
             </li>
           ))}

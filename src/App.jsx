@@ -3,7 +3,7 @@ import { useThemeStore } from "#store/theme.js";
 import gsap from "gsap";
 import { Draggable }  from "gsap/Draggable";
 import { Navbar , Welcome  , Dock} from "#components";
-import  {Terminal}  from "#windows";
+import  {Terminal , Safari , Resumen, Finder , Text , Image, Contact}  from "#windows";
 
 gsap.registerPlugin(Draggable);
 const App = ()=>{
@@ -22,11 +22,27 @@ const App = ()=>{
 
   return (
     <main>
+      <video
+        id="bg-video"
+        className="bg-video"
+        src="/images/FONDO.mp4"
+        autoPlay
+        muted
+        loop
+        playsInline
+        aria-hidden="true"
+      />
       <Navbar /> 
       <Welcome/>
       <Dock/>
 
       <Terminal/>
+      <Safari/>
+      <Resumen/>
+      <Finder/>
+      <Text/>
+      <Image/>
+      <Contact/>
     </main>
   );
 };
