@@ -1,16 +1,58 @@
-# React + Vite
+Gemini said
+¡Entendido! Vamos a hacerlo bien simple para que no se rompa nada. Aquí tienes el contenido completo del README.md. Solo tienes que borrar todo lo que tengas en ese archivo y pegar este bloque exacto.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+🖥️ Alfredo Agüero - OS Portfolio
+Bienvenido a mi rincón en la web. He diseñado este portafolio para que se sienta como un sistema operativo real, fusionando mi pasión por el Desarrollo Frontend y la creación de interfaces interactivas.
 
-Currently, two official plugins are available:
+🚀 Lo que hace especial a este proyecto
+Multitasking Real: Sistema de gestión de ventanas múltiples desarrollado con Zustand. Puedes abrir la Terminal y el Finder al mismo tiempo, tal como en tu PC.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Terminal Interactiva: Un emulador de consola con efecto de escritura automática que detalla mis habilidades técnicas.
 
-## React Compiler
+Sistema Bilingüe (ES/EN): El sitio cambia dinámicamente todo el contenido, incluyendo las rutas de mi Currículum según el idioma seleccionado.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Animaciones Fluídas: Interacciones del Dock y ventanas potenciadas por GSAP para una experiencia premium.
 
-## Expanding the ESLint configuration
+Seguridad y Privacidad: Implementación de copiado de email seguro para evitar el spam de bots.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+🛠️ Mi Stack Tecnológico
+Categoría	Tecnologías
+Framework Principal	React 18 + Vite
+Estilos	Tailwind CSS
+Animaciones	GSAP (GreenSock)
+Estado Global	Zustand
+Iconografía	Lucide React
+Despliegue	Netlify
+📂 Estructura del Código
+src/windows: Contiene la lógica individual de cada aplicación (Finder, Terminal, Contacto, Resumen).
+
+src/store: Gestión centralizada de ventanas, foco e idioma.
+
+src/constants: Datos estáticos y diccionarios de traducción.
+
+src/hoc: Componentes de orden superior para dar funcionalidad de "arrastrar" y "enfocar" a las ventanas.
+
+👨‍💻 Sobre Mí
+Soy estudiante de la Tecnicatura en Programación en la Universidad Nacional de San Juan (UNSJ), Argentina. Tengo 31 años, hablo inglés a un nivel B2 y estoy enfocado en conseguir mi primer gran desafío en la industria IT.
+
+Me apasiona el orden, el código limpio y los desafíos visuales complejos.
+
+⚙️ Cómo correrlo localmente
+Clona este repositorio:
+
+Bash
+git clone https://github.com/tu-usuario/nombre-de-tu-repo.git
+Instala las dependencias:
+
+Bash
+npm install
+Lanza el modo desarrollo:
+
+Bash
+npm run dev
+✉️ Contacto
+LinkedIn: (https://www.linkedin.com/in/alfredoagortiz/)
+
+Portfolio Web: (https://alfredo-aguero-dev.netlify.app/)
+
+Email: alfreagor@gmail.com
