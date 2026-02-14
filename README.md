@@ -1,56 +1,72 @@
+# 🖥️ Alfredo Agüero - OS Portfolio
 
-🖥️ Alfredo Agüero - OS Portfolio
-Bienvenido a mi rincón en la web. He diseñado este portafolio para que se sienta como un sistema operativo real, fusionando mi pasión por el Desarrollo Frontend y la creación de interfaces interactivas.
+Bienvenido a mi rincón en la web. He diseñado este portafolio para que se sienta como un sistema operativo real, fusionando mi pasión por el **Desarrollo Frontend** y la creación de interfaces interactivas.
 
-🚀 Lo que hace especial a este proyecto
-Multitasking Real: Sistema de gestión de ventanas múltiples desarrollado con Zustand. Puedes abrir la Terminal y el Finder al mismo tiempo, tal como en tu PC.
+---
 
-Terminal Interactiva: Un emulador de consola con efecto de escritura automática que detalla mis habilidades técnicas.
+## 🚀 Características del Proyecto
 
-Sistema Bilingüe (ES/EN): El sitio cambia dinámicamente todo el contenido, incluyendo las rutas de mi Currículum según el idioma seleccionado.
+* **Multitasking Real:** Sistema de gestión de ventanas múltiples desarrollado con **Zustand**. Puedes abrir la Terminal y el Finder al mismo tiempo.
+* **Terminal Interactiva:** Un emulador de consola con efecto de escritura automática (Typewriter Effect) que detalla mis habilidades técnicas.
+* **Sistema Bilingüe (ES/EN):** Traducción dinámica de toda la interfaz, incluyendo la carga del Currículum correspondiente (ES/EN).
+* **Animaciones Premium:** Interacciones del Dock y transiciones de ventanas potenciadas por **GSAP**.
+* **Seguridad:** Implementación de copiado de email seguro para proteger mi casilla contra bots de spam.
 
-Animaciones Fluídas: Interacciones del Dock y ventanas potenciadas por GSAP para una experiencia premium.
+---
 
-Seguridad y Privacidad: Implementación de copiado de email seguro para evitar el spam de bots.
+## 🛠️ Mi Stack Tecnológico
 
-🛠️ Mi Stack Tecnológico
-Categoría	Tecnologías
-Framework Principal	React 18 + Vite
-Estilos	Tailwind CSS
-Animaciones	GSAP (GreenSock)
-Estado Global	Zustand
-Iconografía	Lucide React
-Despliegue	Netlify
-📂 Estructura del Código
-src/windows: Contiene la lógica individual de cada aplicación (Finder, Terminal, Contacto, Resumen).
+| Categoría | Tecnologías |
+| :--- | :--- |
+| **Framework Principal** | React 18 + Vite |
+| **Estilos** | Tailwind CSS |
+| **Animaciones** | GSAP (GreenSock) |
+| **Estado Global** | Zustand |
+| **Iconografía** | Lucide React |
+| **Despliegue** | Netlify |
 
-src/store: Gestión centralizada de ventanas, foco e idioma.
+---
 
-src/constants: Datos estáticos y diccionarios de traducción.
+## 📂 Arquitectura del Código
 
-src/hoc: Componentes de orden superior para dar funcionalidad de "arrastrar" y "enfocar" a las ventanas.
+* `src/windows`: Lógica y diseño de cada aplicación (Finder, Terminal, Contacto, Resumen).
+* `src/store`: Gestión centralizada de ventanas, profundidad (Z-index) e idioma.
+* `src/constants`: Datos estáticos y diccionarios de traducción.
+* `src/hoc`: Higher-Order Components para dar funcionalidad de "arrastrar" y "enfocar" a las ventanas.
 
-👨‍💻 Sobre Mí
-Soy estudiante de la Tecnicatura en Programación en la Universidad Nacional de San Juan (UNSJ), Argentina. Tengo 31 años, hablo inglés a un nivel B2 y estoy enfocado en conseguir mi primer gran desafío en la industria IT.
+---
+
+## 👨‍💻 Sobre Mí
+
+Soy estudiante de la **Tecnicatura en Programación en la Universidad Nacional de San Juan (UNSJ)**, Argentina. Tengo 31 años, hablo inglés a un nivel **B2** y estoy enfocado en conseguir mi primer gran desafío profesional en la industria IT.
 
 Me apasiona el orden, el código limpio y los desafíos visuales complejos.
 
-⚙️ Cómo correrlo localmente
-Clona este repositorio:
+---
 
-Bash
-git clone https://github.com/tu-usuario/nombre-de-tu-repo.git
-Instala las dependencias:
+## ⚙️ Configuración Local
 
-Bash
-npm install
-Lanza el modo desarrollo:
+1.  **Clona este repositorio:**
+    ```bash
+    git clone [https://github.com/tu-usuario/nombre-de-tu-repo.git](https://github.com/tu-usuario/nombre-de-tu-repo.git)
+    ```
+2.  **Instala las dependencias:**
+    ```bash
+    npm install
+    ```
+3.  **Lanza el modo desarrollo:**
+    ```bash
+    npm run dev
+    ```
 
-Bash
-npm run dev
-✉️ Contacto
-LinkedIn: (https://www.linkedin.com/in/alfredoagortiz/)
+---
 
-Portfolio Web: (https://alfredo-aguero-dev.netlify.app/)
+## ✉️ Contacto
 
-Email: alfreagor@gmail.com
+* **LinkedIn:** [(https://www.linkedin.com/in/alfredoagortiz/)]
+* **Portfolio Web:** [(https://alfredo-aguero-dev.netlify.app/)]
+* **Email:** `alfreagor@gmail.com`
+
+---
+
+© 2026 Alfredo Agüero — Desarrollado con pasión en San Juan, Argentina.
