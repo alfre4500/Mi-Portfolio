@@ -77,7 +77,7 @@ const Finder = () => {
                 </div>
                 {/* Contenedor del Texto */}
                 <div className="w-full h-10 flex items-start justify-center">
-                    <p className="text-xs text-center text-gray-700 font-medium leading-tight line-clamp-2 -wrap-break-words group-hover:text-blue-700 px-1 rounded-sm">
+                    <p className="text-xs text-center text-gray-700 font-medium leading-tight line-clamp-2 wrap-break-word group-hover:text-blue-700 px-1 rounded-sm">
                       {item.name} 
                     </p>
                 </div>

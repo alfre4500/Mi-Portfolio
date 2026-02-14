@@ -2,21 +2,23 @@ import { useEffect } from "react";
 import { useThemeStore } from "#store/theme.js";
 import gsap from "gsap";
 import { Draggable }  from "gsap/Draggable";
-import { Navbar , Welcome  , Dock} from "#components";
-import  {Terminal , Safari , Resumen, Finder , Text , Image, Contact}  from "#windows";
+import { Navbar, Welcome, Dock } from "#components";
+import { Terminal, Safari, Resumen, Finder, Text, Image, Contact , Photos } from "#windows";
 
 gsap.registerPlugin(Draggable);
-const App = ()=>{
+
+const App = () => {
   console.log('🔁 App render start');
   const theme = useThemeStore((state) => state.theme);
 
   useEffect(() => {
+    const root = document.documentElement;
     if (theme === 'dark') {
-      document.documentElement.classList.add('dark');
-      document.documentElement.classList.remove('light');
+      root.classList.add('dark');
+      root.classList.remove('light');
     } else {
-      document.documentElement.classList.add('light');
-      document.documentElement.classList.remove('dark');
+      root.classList.add('light');
+      root.classList.remove('dark');
     }
   }, [theme]);
 
@@ -32,18 +34,24 @@ const App = ()=>{
         playsInline
         aria-hidden="true"
       />
+      
       <Navbar /> 
-      <Welcome/>
-      <Dock/>
+      <Welcome />
 
-      <Terminal/>
-      <Safari/>
-      <Resumen/>
-      <Finder/>
-      <Text/>
-      <Image/>
-      <Contact/>
+ 
+      <Terminal />
+      <Safari />
+      <Resumen />
+      <Finder />
+      <Text />
+      <Image />
+      <Contact />
+      <Photos/>
+
+
+      <Dock />
     </main>
   );
 };
+
 export default App;
