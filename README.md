@@ -1,5 +1,3 @@
-Gemini said
-¡Entendido! Vamos a hacerlo bien simple para que no se rompa nada. Aquí tienes el contenido completo del README.md. Solo tienes que borrar todo lo que tengas en ese archivo y pegar este bloque exacto.
 
 🖥️ Alfredo Agüero - OS Portfolio
 Bienvenido a mi rincón en la web. He diseñado este portafolio para que se sienta como un sistema operativo real, fusionando mi pasión por el Desarrollo Frontend y la creación de interfaces interactivas.
