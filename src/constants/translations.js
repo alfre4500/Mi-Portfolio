@@ -87,6 +87,10 @@ export const translations = {
 
     // Messages
     desktopOnly: "Este Portafolio está diseñado para escritorio y tablet.",
+
+    // --- NUEVAS TRADUCCIONES PARA EL CV ---
+    resumeUrl: "/files/Alfredo.Aguero.CV.pdf", 
+    resumeTitle: "Mi Currículum",
   },
 
   en: {
@@ -112,7 +116,7 @@ export const translations = {
     // Dock Apps
     dockApps: [
       {
-        id: "resume",
+        id:  "finder",
         name: "Portfolio",
         tooltip: "Projects",
         icon: "finder.png",
@@ -177,6 +181,10 @@ export const translations = {
 
     // Messages
     desktopOnly: "This Portfolio is designed for desktop and tablet.",
+
+    // --- NUEVAS TRADUCCIONES PARA EL CV ---
+    resumeUrl: "/files/Alfredo.Aguero.Resume.pdf",
+    resumeTitle: "My Resume",
   },
 };
 

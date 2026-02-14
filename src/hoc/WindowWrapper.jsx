@@ -1,6 +1,6 @@
 import useWindowStore from "#store/window.js";
 import { useGSAP } from "@gsap/react";
-import { gsap } from "gsap";
+import gsap from "gsap";
 import { Draggable } from "gsap/Draggable";
 import { useRef } from "react";
 
@@ -33,30 +33,25 @@ const WindowWrapper = (Component, windowKey) => {
             } else {
                 el.style.display = "none";
             }
-        }, [isOpen]); // Solo depende de si se abre/cierra
+        }, [isOpen]); 
 
-        // 4. Hook Draggable (CORREGIDO)
+        // 4. Hook Draggable
         useGSAP(() => {
-            // Solo creamos draggable si la ventana existe y el elemento está en el DOM
             if (!win || !ref.current || !isOpen) return;
             
             const dragInstance = Draggable.create(ref.current, {
                 type: "x,y",
-                // Esto actualiza el store, pero NO queremos que reinicie el Draggable
                 onPress: () => focusWindow(windowKey), 
                 zIndexBoost: false,
-                // Opcional: Esto ayuda a que el draggable respete los límites si lo necesitas
-                // bounds: "body" 
+                // bounds: "body" // Descomenta si quieres limitar el movimiento
             });
 
             return () => {
                 if(dragInstance[0]) dragInstance[0].kill();
             }
-        // CAMBIO CLAVE AQUÍ: Usamos [isOpen] en lugar de [win]
-        // Así, al hacer click (focusWindow), el draggable NO se reinicia.
         }, [isOpen]); 
 
-        // 5. Retorno condicional al final
+        // 5. Retorno condicional
         if (!win) return null;
 
         return (
@@ -66,7 +61,9 @@ const WindowWrapper = (Component, windowKey) => {
                 style={{ zIndex }} 
                 className={`absolute ${!isOpen ? 'hidden' : ''} app-window`}
             >
-                <Component {...props} />
+                {/* CAMBIO AQUÍ: Pasamos el 'id' al componente hijo */}
+                {/* Esto permite que Finder sepa si es 'finder' o 'about' */}
+                <Component id={windowKey} {...props} />
             </section>
         );
     };
