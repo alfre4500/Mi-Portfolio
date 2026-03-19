@@ -272,7 +272,7 @@ const ABOUT_LOCATION = {
       position: "top-60 left-5",
       subtitle: "Conoce al Desarrollador",
       image: "/images/alfre2.jpg",
-      description: ["¡Hola! Soy un apasionado desarrollador front-end con experiencia en la creación de sitios web y aplicaciones móviles. Me especializo en tecnologías como React, Next.js, TypeScript y Tailwind CSS, y siempre estoy buscando aprender nuevas herramientas y técnicas para mejorar mis habilidades. Mi objetivo es crear experiencias digitales atractivas, funcionales y accesibles que conecten con los usuarios. ¡Estoy emocionado de compartir mi trabajo y seguir creciendo en el mundo del desarrollo web!"],
+      description: ["¡Hola! Soy desarrollador Frontend de San Juan, Argentina. Me especializo en construir aplicaciones web modernas, rápidas y visualmente atractivas usando React, Next.js y Tailwind CSS. Mi enfoque está en escribir código limpio y diseñar interfaces centradas en el usuario."],
     },
   ],
 };
