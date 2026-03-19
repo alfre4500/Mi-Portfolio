@@ -81,7 +81,7 @@ const Dock = () => {
 
     // --- CASO ESPECIAL: SOBRE MÍ ---
     if (id === "photos") {
-      const aboutWin = windows["about"]; // Miramos la ventana 'about'
+      const aboutWin = windows["about"];
       if (aboutWin?.isOpen) {
         closeWindow("about");
       } else {

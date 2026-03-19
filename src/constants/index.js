@@ -44,6 +44,36 @@ const blogPosts = [
   },
 ];
 
+const certificates = [
+  {
+    id: 1,
+    title: "React Avanzado",
+    issuer: "Platzi",
+    date: "Nov 15, 2025",
+    image: "/images/cert1.png",
+    link: "https://platzi.com/p/alfre4500/certificates/react-avanzado",
+    description: "Desarrollo completo de aplicaciones React con patrones avanzados y rendimiento.",
+  },
+  {
+    id: 2,
+    title: "TypeScript Profesional",
+    issuer: "Udemy",
+    date: "Jul 10, 2025",
+    image: "/images/cert2.png",
+    link: "https://www.udemy.com/certificate/UC-12345678",
+    description: "Tipado estático y escalabilidad en aplicaciones JavaScript con TypeScript.",
+  },
+  {
+    id: 3,
+    title: "GSAP Animations Master",
+    issuer: "Scrum Master Academy",
+    date: "Mar 20, 2025",
+    image: "/images/cert3.png",
+    link: "https://example.com/cert/gsap",
+    description: "Animaciones de alto impacto para interfaces web interactivas con GSAP.",
+  },
+];
+
 const techStack = [
   { category: "Frontend", items: ["React.js", "Next.js", "TypeScript", "GSAP", "Three.js", "React Three Fiber", "Vite"] },
   { category: "Mobile", items: ["React Native", "Expo"] },
@@ -69,12 +99,11 @@ const photosLinks = [
 ];
 
 
-export { navLinks, navIcons, dockApps, blogPosts, techStack, socials, photosLinks };
+export { navLinks, navIcons, dockApps, blogPosts, certificates, techStack, socials, photosLinks };
 
-const WORK_LOCATION = {
-  id: "folder-work",
+const WORK_LOCATION = {  id: "folder-work",
   type: "work",
-  name: "Trabajo",
+  name: "Proyectos",
   icon: "/icons/work.svg",
   kind: "folder",
   fileType: "folder",
@@ -172,6 +201,45 @@ const WORK_LOCATION = {
              fileType: "txt",
              position: "top-5 left-10",
              description: ["..."]
+        }
+      ],
+    },
+   {
+      id: "project-nuevo", // Cambiá esto por el ID de tu proyecto
+      name: "Macbook-GSAP", // El nombre que se verá debajo de la carpeta
+      icon: "/images/folder.png",
+      kind: "folder",
+      fileType: "folder",
+      // 👇 Acá está la magia de la posición. top-10 lo alinea en altura con Nike, y left-32 lo pone al lado.
+      position: "top-10 left-32", 
+      windowPosition: "top-[25vh] left-20", // Dónde se abrirá la ventana cuando le hagan doble clic
+      children: [
+        {
+             id: "nuevo-txt",
+             name: "Descripcion.txt",
+             icon: "/images/txt.png",
+             kind: "file",
+             fileType: "txt",
+             position: "top-5 left-10",
+             description: ["Este proyecto es un clon interactivo del MacBook Pro que utiliza modelos 3D y animaciones vinculadas al scroll para crear una experiencia inmersiva. Mi objetivo es demostrar habilidades  en React y desarrollo Frontend responsivo."],
+        },
+        {
+           id: "macbook-web",
+          name: "macbook-gsap.com",
+          icon: "/images/safari.png",
+          kind: "file",
+          fileType: "url",
+          href: "https://macbook-gsap-ebon.vercel.app/",
+         position: "top-40 left-20",
+        },
+        {
+          id: "macbook-github",
+          name: "Repositorio",
+          icon: "/icons/github-black.svg",
+          kind: "file",
+          fileType: "url",
+          href: "https://github.com/alfre4500/MACBOOK-GSAP.git",
+          position: "top-10 right-20",
         }
       ],
     },

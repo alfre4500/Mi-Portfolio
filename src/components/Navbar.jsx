@@ -46,7 +46,14 @@ const Navbar = () => {
             <img src="/icons/user.svg" className="icon-hover" alt="user" />
           </li>
           <li>
-            <img src="/icons/mode.svg" className="icon-hover cursor-pointer" alt="mode" onClick={toggleTheme} title={theme === 'dark' ? 'Light mode' : 'Dark mode'} />
+            <img
+              src="/icons/mode.svg"
+              className="icon-hover cursor-pointer icon-highlight"
+              alt="mode"
+              style={{ filter: theme === 'dark' ? 'invert(1) brightness(1.3)' : 'invert(0) brightness(1)' }}
+              onClick={toggleTheme}
+              title={theme === 'dark' ? 'Light mode' : 'Dark mode'}
+            />
           </li>
         </ul>
         <time>{dayjs().format("DD/MM/YYYY h:mm ")}</time>

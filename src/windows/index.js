@@ -9,8 +9,6 @@ import Contact from "#windows/Contact.jsx";
 import WindowWrapper from "#hoc/WindowWrapper";
 
 const Finder = WindowWrapper(FinderComponent, "finder");
-
 const About = WindowWrapper(FinderComponent, "about");
-
 
 export { Terminal, Safari, Resumen, Finder, About, Text, Image, Contact };

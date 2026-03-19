@@ -120,6 +120,24 @@ body {
     @apply p-1 hover:bg-gray-200 rounded hover:cursor-default;
   }
 
+  .icon-highlight {
+    @apply p-1 rounded-full border-2 border-transparent transition-all;
+    background-color: rgba(0,0,0,0.08);
+    box-shadow: 0 0 0 1px rgba(0,0,0,0.1);
+  }
+
+  :root .icon-highlight {
+    background-color: rgba(0, 0, 0, 0.06);
+    border-color: rgba(0, 0, 0, 0.15);
+    filter: invert(0);
+  }
+
+  :root.dark .icon-highlight {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.35);
+    filter: invert(1);
+  }
+
   #welcome {
     @apply flex flex-col justify-center items-center absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 select-none max-sm:h-screen max-sm:w-full max-sm:px-10;
     color: #ffffff;
@@ -236,8 +254,49 @@ body {
       background-color: var(--bg-secondary);
 
       h2 {
-        @apply text-xl font-bold mb-10;
+        @apply text-xl font-bold mb-4;
         color: var(--text-primary);
+      }
+
+      p {
+        @apply text-sm text-gray-500;
+      }
+
+      .certificates-grid {
+        @apply grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3;
+      }
+
+      .certificate-card {
+        @apply rounded-2xl border border-gray-200 bg-white p-4 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg overflow-hidden;
+      }
+
+      .certificate-thumb {
+        @apply h-36 w-full object-cover rounded-lg mb-3;
+      }
+
+      .certificate-meta {
+        @apply flex flex-col gap-1;
+      }
+
+      .certificate-meta h3 {
+        @apply text-base font-bold;
+        color: var(--text-primary);
+      }
+
+      .certificate-meta .issuer {
+        @apply text-xs font-medium text-blue-600;
+      }
+
+      .certificate-meta .date {
+        @apply text-xs text-gray-500;
+      }
+
+      .certificate-meta .description {
+        @apply text-sm text-gray-600 mb-3;
+      }
+
+      .certificate-link {
+        @apply inline-flex items-center gap-1 text-sm font-semibold text-blue-700 hover:text-blue-900;
       }
 
       .blog-post {
@@ -473,6 +532,44 @@ body {
 
     .sidebar {
       @apply w-48 bg-gray-50 border-r border-gray-200 flex flex-col p-5 space-y-3;
+  }
+  }
+
+  #about {
+    @apply absolute w-3xl left-1/2 -translate-x-1/2 top-24 shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden transition-colors duration-300;
+    background-color: var(--window-bg);
+    border: 1px solid var(--border-color);
+    max-height: 78vh;
+
+    #window-header {
+      @apply bg-[#f3f4f6] border-b border-gray-200 px-3 py-2.5;
+    }
+
+    .p-6 {
+      @apply overflow-y-auto h-full px-4 py-4;
+      max-height: calc(78vh - 60px); /* ajustar según header */
+    }
+
+    h2 {
+      @apply text-lg font-bold text-gray-800 mb-3;
+    }
+
+    .text-sm {
+      @apply mb-4;
+    }
+
+    .grid {
+      @apply gap-4;
+    }
+
+    .flex {
+      @apply items-center;
+    }
+
+    .button {
+      @apply ml-auto;
+    }
+  }
 
       h3 {
         @apply text-xs font-medium text-gray-400 mb-1;

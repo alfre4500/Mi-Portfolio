@@ -1,5 +1,5 @@
 import { WindowControlls } from "#components";
-import { blogPosts } from "#constants";
+import { blogPosts, certificates } from "#constants";
 import WindowWrapper from "#hoc/WindowWrapper.jsx";
 import { Copy, PanelLeft, Plus, ChevronLeft, ChevronRight, ShieldHalf, Search, Share, MoveRight } from "lucide-react";
 
@@ -30,22 +30,27 @@ const Safari = () => {
           </div>
         </div>
       </div>
-      <div className="blog" >
-<h2 className="flex flex-center">Prueba de contenido</h2>
-<div className="space-y-8">
-{blogPosts.map(({id , image , title , date , link} ) =>(
-    <div key={id} className="blog-post" >
-        <div className="col-span-2" >
-            <img src={image} alt="{title}" />
+      <div className="blog">
+        <h2 className="flex flex-center">Certificados</h2>
+        <p className="text-center text-sm text-gray-500 mb-8">Mi formación más reciente y certificaciones oficiales</p>
+
+        <div className="certificates-grid">
+          {certificates.map(({ id, image, title, issuer, date, description, link }) => (
+            <article key={id} className="certificate-card group">
+              <img src={image} alt={title} className="certificate-thumb" />
+              <div className="certificate-meta">
+                <h3>{title}</h3>
+                <p className="issuer">{issuer}</p>
+                <p className="date">{date}</p>
+                <p className="description">{description}</p>
+                <a href={link} target="_blank" rel="noopener noreferrer" className="certificate-link">
+                  Ver certificado <MoveRight className="icon-hover" />
+                </a>
+              </div>
+            </article>
+          ))}
         </div>
-        <div className="content">
-<p>{date} </p>
-<h3>{title}</h3>
-<a href={link} target="_blank" rel="noopener, noreferrer">chequea el contenido completo<MoveRight className="icon-hover" /> </a>
-        </div>
-        </div>
-))}
-</div>
+
       </div>
     </>
   );

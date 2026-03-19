@@ -87,6 +87,7 @@ export const translations = {
 
     // Messages
     desktopOnly: "Este Portafolio está diseñado para escritorio y tablet.",
+    aboutTitle: "Sobre mí",
 
     // --- NUEVAS TRADUCCIONES PARA EL CV ---
     resumeUrl: "/files/Alfredo.Aguero.CV.pdf", 
@@ -181,6 +182,7 @@ export const translations = {
 
     // Messages
     desktopOnly: "This Portfolio is designed for desktop and tablet.",
+    aboutTitle: "About me",
 
     // --- NUEVAS TRADUCCIONES PARA EL CV ---
     resumeUrl: "/files/Alfredo.Aguero.Resume.pdf",
