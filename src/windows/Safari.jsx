@@ -1,5 +1,5 @@
 import { WindowControlls } from "#components";
-import { blogPosts, certificates } from "#constants";
+import { certificates } from "#constants";
 import WindowWrapper from "#hoc/WindowWrapper.jsx";
 import { Copy, PanelLeft, Plus, ChevronLeft, ChevronRight, ShieldHalf, Search, Share, MoveRight } from "lucide-react";
 
@@ -37,7 +37,15 @@ const Safari = () => {
         <div className="certificates-grid">
           {certificates.map(({ id, image, title, issuer, date, description, link }) => (
             <article key={id} className="certificate-card group">
-              <img src={image} alt={title} className="certificate-thumb" />
+              <img
+                src={image}
+                alt={title}
+                className="certificate-thumb"
+                onError={(event) => {
+                  event.currentTarget.onerror = null;
+                  event.currentTarget.src = "/images/blog1.png";
+                }}
+              />
               <div className="certificate-meta">
                 <h3>{title}</h3>
                 <p className="issuer">{issuer}</p>

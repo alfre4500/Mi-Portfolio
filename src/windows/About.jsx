@@ -51,7 +51,7 @@ const About = () => {
           <h3 className="text-xl font-bold mb-4 border-b pb-2" style={{ color: "var(--text-primary)", borderColor: "var(--border-color)" }}>
             Acerca de mí
           </h3>
-          <p className="text-sm leading-relaxed mb-8 text-pretty" style={{ color: "var(--text-secondary)" }}>
+          <p className="text-sm leading-relaxed mb-6 text-pretty" style={{ color: "var(--text-secondary)" }}>
             {description}
           </p>
 

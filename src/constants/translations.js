@@ -61,7 +61,7 @@ export const translations = {
         name: "Archivo",
         tooltip: "Archivo",
         icon: "trash.png",
-        canOpen: false,
+        canOpen: true,
       },
     ],
 
@@ -156,7 +156,7 @@ export const translations = {
         name: "Archive",
         tooltip: "Archive",
         icon: "trash.png",
-        canOpen: false,
+        canOpen: true,
       },
     ],
 

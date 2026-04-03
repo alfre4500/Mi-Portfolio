@@ -18,6 +18,7 @@ export const useWindowStore = create(immer((set) => ({
         
         win.isOpen = true;
         win.zIndex = state.nextzindex;
+        win.isPending = false;
   
         win.data = data ?? win.data; 
         state.nextzindex++;
@@ -30,6 +31,40 @@ export const useWindowStore = create(immer((set) => ({
         win.isOpen = false;
         win.zIndex = INITIAL_Z_INDEX; 
         win.data = null;
+        win.isPending = false;
+    }),
+
+    closeAllWindows: () => set((state) => {
+        Object.values(state.windows).forEach((win) => {
+            win.isOpen = false;
+            win.zIndex = INITIAL_Z_INDEX;
+            win.data = null;
+            win.isPending = false;
+        });
+    }),
+
+    closePendingWindows: () => set((state) => {
+        const openWindows = Object.values(state.windows).filter((w) => w.isOpen);
+        if (openWindows.length <= 1) return;
+
+        const maxZ = Math.max(...openWindows.map((w) => w.zIndex));
+
+        openWindows.forEach((win) => {
+            if (win.zIndex < maxZ) {
+                win.isOpen = false;
+                win.zIndex = INITIAL_Z_INDEX;
+                win.data = null;
+                win.isPending = false;
+            }
+        });
+    }),
+
+    markWindowPending: (windowkey) => set((state) => {
+        const win = state.windows[windowkey];
+        if (!win) return;
+        if (!win.isOpen) return;
+
+        win.isPending = true;
     }),
 
     focusWindow: (windowkey) => set((state) => {
@@ -37,6 +72,7 @@ export const useWindowStore = create(immer((set) => ({
         if (!win) return; // Protección
 
         win.zIndex = state.nextzindex++;
+        win.isPending = false;
     }),
 })));
 

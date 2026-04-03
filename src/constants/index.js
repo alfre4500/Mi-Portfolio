@@ -20,46 +20,23 @@ const dockApps = [
   { id: "trash", name: "Archivo", tooltip: "Archivo", icon: "trash.png", canOpen: false },
 ];
 
-const blogPosts = [
-  {
-    id: 1,
-    date: "Sep 2, 2025",
-    title: "TypeScript Explained: What It Is, Why It Matters, and How to Master It",
-    image: "/images/blog1.png",
-    link: "https://jsmastery.com/blog/typescript-explained-what-it-is-why-it-matters-and-how-to-master-it",
-  },
-  {
-    id: 2,
-    date: "Aug 28, 2025",
-    title: "The Ultimate Guide to Mastering Three.js for 3D Development",
-    image: "/images/blog2.png",
-    link: "https://jsmastery.com/blog/the-ultimate-guide-to-mastering-three-js-for-3d-development",
-  },
-  {
-    id: 3,
-    date: "Aug 15, 2025",
-    title: "The Ultimate Guide to Mastering GSAP Animations",
-    image: "/images/blog3.png",
-    link: "https://jsmastery.com/blog/the-ultimate-guide-to-mastering-gsap-animations",
-  },
-];
 
 const certificates = [
   {
     id: 1,
-    title: "React Avanzado",
-    issuer: "Platzi",
-    date: "Nov 15, 2025",
-    image: "/images/cert1.png",
-    link: "https://platzi.com/p/alfre4500/certificates/react-avanzado",
-    description: "Desarrollo completo de aplicaciones React con patrones avanzados y rendimiento.",
+    title: "Gestión de Proyectos Tradicional y Ágil",
+    issuer: "Coursera / Google",
+    date: "Feb 3, 2025",
+    image: "/images/blog3.png",
+    link: "https://www.coursera.org/account/accomplishments/specialization/TSL78M9M6NVC",
+    description: "Programa profesional enfocado en la gestión tradicional y ágil de proyectos, abarcando desde la planificación y manejo de riesgos hasta la implementación con Scrum.",
   },
   {
     id: 2,
     title: "TypeScript Profesional",
     issuer: "Udemy",
     date: "Jul 10, 2025",
-    image: "/images/cert2.png",
+    image: "/images/blog1.png",
     link: "https://www.udemy.com/certificate/UC-12345678",
     description: "Tipado estático y escalabilidad en aplicaciones JavaScript con TypeScript.",
   },
@@ -68,7 +45,7 @@ const certificates = [
     title: "GSAP Animations Master",
     issuer: "Scrum Master Academy",
     date: "Mar 20, 2025",
-    image: "/images/cert3.png",
+    image: "/images/blog2.png",
     link: "https://example.com/cert/gsap",
     description: "Animaciones de alto impacto para interfaces web interactivas con GSAP.",
   },
@@ -85,8 +62,6 @@ const techStack = [
 
 const socials = [
   { id: 1, text: "Github", icon: "/icons/github.svg", bg: "#f4656b", link: "https://github.com/alfre4500" },
-  { id: 2, text: "Platform", icon: "/icons/atom.svg", bg: "#4bcb63", link: "https://jsmastery.com/" },
-  { id: 3, text: "Twitter/X", icon: "/icons/twitter.svg", bg: "#ff866b", link: "https://x.com/jsmasterypro" },
   { id: 4, text: "LinkedIn", icon: "/icons/linkedin.svg", bg: "#05b6f6", link: "https://www.linkedin.com/in/alfredoagortiz/" },
 ];
 
@@ -99,7 +74,7 @@ const photosLinks = [
 ];
 
 
-export { navLinks, navIcons, dockApps, blogPosts, certificates, techStack, socials, photosLinks };
+export { navLinks, navIcons, dockApps,  certificates, techStack, socials, photosLinks };
 
 const WORK_LOCATION = {  id: "folder-work",
   type: "work",
@@ -292,19 +267,45 @@ const RESUME_LOCATION = {
 const TRASH_LOCATION = {
   id: "folder-trash",
   type: "trash",
-  name: "Papelera",
+  name: "Archivo",
   icon: "/icons/trash.svg",
   kind: "folder",
   fileType: "folder",
   children: [
     {
-      id: "trash-1",
-      name: "trash1.png",
-      icon: "/images/image.png",
+      id: "doc-cv",
+      name: "Currículum",
+      icon: "/images/pdf.png",
       kind: "file",
-      fileType: "img",
-      position: "top-10 left-10",
-      imageUrl: "/images/trash-1.png",
+      fileType: "pdf",
+      description: ["Descarga mi CV en PDF."],
+      href: "/files/Alfredo.Aguero.CV.pdf",
+    },
+    {
+      id: "doc-certificates",
+      name: "Certificados",
+      icon: "/images/safari.png",
+      kind: "file",
+      fileType: "url",
+      description: ["Mira mis certificaciones y cursos completados."],
+      href: "https://www.coursera.org/",
+    },
+    {
+      id: "doc-projects",
+      name: "Proyectos",
+      icon: "/images/folder.png",
+      kind: "file",
+      fileType: "folder",
+      description: ["Accede a una selección de proyectos reales."],
+      href: "/",
+    },
+    {
+      id: "doc-contact",
+      name: "Contacto",
+      icon: "/images/contact.png",
+      kind: "file",
+      fileType: "contact",
+      description: ["Escríbeme para cualquier propuesta o consultoría."],
     },
   ],
 };
@@ -328,6 +329,16 @@ const WINDOW_CONFIG = {
   terminal: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },
   txtfile: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },
   imgfile: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },
+  trash: {
+    isOpen: false,
+    zIndex: INITIAL_Z_INDEX,
+    data: null,
+    title: "Archivo",
+    width: 760,
+    height: 520,
+    isMinimised: false,
+    isMaximised: false,
+  },
   // NUEVA VENTANA "ABOUT"
   about: { 
     isOpen: false, 

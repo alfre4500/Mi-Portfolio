@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 // Importación sin llaves (Default Export) - CORRECTO
 import WindowControlls from "#components/WindowControlls.jsx"; 
-import { locations } from "#constants";
+import { locations, INITIAL_Z_INDEX } from "#constants";
 import { Search } from "lucide-react";
 import clsx from "clsx";
 import useWindowStore from "#store/window.js";
@@ -79,20 +79,27 @@ const Finder = ({ id }) => {
     setPathStack(getPathForLocation(location));
   };
 
-  // CORRECCIÓN CLAVE:
-  // Este efecto solo se ejecutará cuando la ventana cambie de estado (abrir/cerrar).
-  // Al abrirse (isOpen: true), forzamos que muestre la carpeta inicial (data).
-  // Al cerrar, reseteamos el estado para que la próxima apertura inicie limpio.
+  const getValidLocation = (location) => {
+    if (!location || !Array.isArray(location.children) || location.children.length === 0) {
+      return locations.work;
+    }
+    return location;
+  };
+
+  // Este efecto se ejecuta cuando la ventana Finder cambia de estado.
+  // Si abre con datos válidos, carga esa carpeta. Si no, usa el work location.
   useEffect(() => {
-    if (finderWindow?.isOpen && finderWindow?.data) {
-      setActiveLocation(finderWindow.data);
-      setPathStack(getPathForLocation(finderWindow.data));
-    } else if (!finderWindow?.isOpen) {
+    if (finderWindow?.isOpen) {
+      const locationData = getValidLocation(finderWindow.data);
+      const safeLocation = getValidLocation(locationData);
+      setActiveLocation(safeLocation);
+      setPathStack(getPathForLocation(safeLocation));
+    } else {
       setActiveLocation(null);
       setPathStack([]);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [finderWindow?.isOpen]); 
+  }, [finderWindow?.isOpen, finderWindow?.data]);
 
   const isSpecialView = activeLocation?.isSpecialView === true;
 
@@ -141,7 +148,7 @@ const Finder = ({ id }) => {
   return (
     <div className="flex flex-col h-full w-full bg-white rounded-lg overflow-hidden font-sans shadow-xl">
       <div id="window-header" className="flex items-center justify-between px-4 py-3 bg-[#f3f4f6] border-b border-gray-200 draggable-area">
-        <WindowControlls target={windowId} />
+        <WindowControlls target="finder" />
         <div className="flex items-center bg-white border border-gray-300 rounded-md px-3 py-1.5 shadow-sm w-56">
              <Search className="w-3.5 h-3.5 text-gray-400 mr-2" />
              <span className="text-xs text-gray-400">{text.search}</span>

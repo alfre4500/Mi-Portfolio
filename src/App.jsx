@@ -3,8 +3,8 @@ import { useThemeStore } from "#store/theme.js";
 import gsap from "gsap";
 import { Draggable }  from "gsap/Draggable";
 import { Navbar, Welcome, Dock } from "#components";
-// 1. AGREGAMOS 'About' A LA IMPORTACIÓN
-import { Terminal, Safari, Resumen, Finder, About, Text, Image, Contact } from "#windows";
+// 1. AGREGAMOS 'About' Y 'Archive' A LA IMPORTACIÓN
+import { Terminal, Safari, Resumen, Finder, About, Archive, Text, Image, Contact } from "#windows";
 
 gsap.registerPlugin(Draggable);
 
@@ -43,7 +43,8 @@ const App = () => {
       <Safari />
       <Resumen />
       <Finder />
-      <About /> 
+      <About />
+      <Archive />
       <Text />
       <Image />
       <Contact />
