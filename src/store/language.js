@@ -1,10 +1,12 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
+const defaultLanguage = typeof window !== 'undefined' && window.navigator.language ? (window.navigator.language.startsWith('en') ? 'en' : 'es') : 'es';
+
 export const useLanguageStore = create(
   persist(
     (set) => ({
-      language: 'es', // 'es' para español, 'en' para inglés
+      language: defaultLanguage,
       
       toggleLanguage: () => set((state) => ({
         language: state.language === 'es' ? 'en' : 'es'

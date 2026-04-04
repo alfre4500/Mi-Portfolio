@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import { useLanguageStore } from "#store/language.js";
+import { getTranslation } from "#constants/translations.js";
 import { locations, certificates, techStack, socials } from "#constants";
 import { ExternalLink, Github, Linkedin, Code, MapPin, Briefcase, Mail, GraduationCap, Globe } from "lucide-react";
 import gsap from "gsap";
@@ -10,13 +11,33 @@ gsap.registerPlugin(ScrollTrigger);
 
 const MobileView = () => {
   const language = useLanguageStore((state) => state.language);
+  const toggleLanguage = useLanguageStore((state) => state.toggleLanguage);
   const containerRef = useRef(null);
 
   const aboutData = locations.about.children;
   const profileImage = aboutData.find((item) => item.fileType === "img")?.imageUrl || "/images/yop.jpg";
-  const description = aboutData.find((item) => item.fileType === "txt")?.description?.[0] || "¡Hola! Soy un desarrollador Frontend...";
+  const description = getTranslation(language, "aboutDescription");
+  const aboutTitle = getTranslation(language, "aboutTitle");
+  const skillsTitle = getTranslation(language, "skillsTitle");
+  const projectsTitle = getTranslation(language, "projectsTitle");
+  const certificatesTitle = getTranslation(language, "certificatesTitle");
+  const contactTitle = getTranslation(language, "contactTitle");
+  const locationLabel = getTranslation(language, "locationLabel");
+  const experienceLabel = getTranslation(language, "experienceLabel");
+  const studiesLabel = getTranslation(language, "studiesLabel");
+  const statusLabel = getTranslation(language, "statusLabel");
+  const statusValue = getTranslation(language, "statusValue");
+  const roleTitle = getTranslation(language, "roleTitle");
+  const experienceValue = getTranslation(language, "experienceValue");
+  const studiesValue = getTranslation(language, "studiesValue");
 
   const projects = locations.work.children || [];
+  const statColorClasses = {
+    blue: "bg-blue-500/20 text-blue-400",
+    green: "bg-green-500/20 text-green-400",
+    purple: "bg-purple-500/20 text-purple-400",
+    red: "bg-red-500/20 text-red-400"
+  };
 
   const getTechTopics = (desc) => {
     const knownTech = ["React", "Next.js", "GSAP", "Zustand", "Stripe", "Tailwind", "Three.js", "3D", "Frontend"];
@@ -73,7 +94,7 @@ const MobileView = () => {
   return (
     <div 
       ref={containerRef}
-      className="relative w-full h-[100dvh] overflow-y-auto overflow-x-hidden scroll-smooth text-white bg-transparent"
+      className="relative w-full h-dvh overflow-y-auto overflow-x-hidden scroll-smooth text-white bg-transparent"
     >
       {/* Fondo fijo */}
       <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none">
@@ -91,17 +112,29 @@ const MobileView = () => {
 
       {/* Header Fijo con Logo de Manzana */}
       <div className="mobile-header fixed top-0 left-0 right-0 z-50 bg-black/50 backdrop-blur-xl border-b border-white/10 shadow-lg">
-        <div 
-          onClick={scrollToTop}
-          className="flex items-center gap-3 px-4 py-3 cursor-pointer active:bg-white/10 transition-colors"
-        >
-          {/* Logo oficial de Apple */}
-          <img 
-            src="/images/logo.svg" 
-            alt="logo" 
-            className="h-5 w-5 object-contain invert brightness-200" 
-          />
-          <span className="font-semibold text-sm tracking-wide">Alfredo Portfolio</span>
+        <div className="flex items-center justify-between px-4 py-3 gap-3">
+          <button
+            type="button"
+            onClick={scrollToTop}
+            className="flex items-center gap-3 text-sm text-white cursor-pointer active:bg-white/10 rounded-full px-3 py-2 transition-colors"
+          >
+            <img
+              src="/images/logo.svg"
+              alt="logo"
+              className="h-5 w-5 object-contain invert brightness-200"
+            />
+            <span className="font-semibold">Alfredo Portfolio</span>
+          </button>
+          <div className="flex items-center gap-2">
+            <button
+              type="button"
+              onClick={toggleLanguage}
+              className="language-btn px-3 py-1 rounded-full bg-white/10 text-white hover:bg-white/20 transition-colors"
+              title={language === 'es' ? 'Change to English' : 'Cambiar a Español'}
+            >
+              {language === 'es' ? 'EN' : 'ES'}
+            </button>
+          </div>
         </div>
       </div>
 
@@ -120,8 +153,9 @@ const MobileView = () => {
               <div className="absolute bottom-2 right-2 w-6 h-6 bg-green-500 border-4 border-black/80 rounded-full shadow-lg"></div>
             </div>
             
+            <p className="text-sm uppercase tracking-[0.35em] text-blue-300 mb-2">{aboutTitle}</p>
             <h1 className="text-4xl font-bold tracking-tight text-white mb-2">Alfredo</h1>
-            <h2 className="text-sm font-bold text-blue-400 uppercase tracking-wider mb-6">Frontend Developer</h2>
+            <h2 className="text-sm font-bold text-blue-400 uppercase tracking-wider mb-6">{roleTitle}</h2>
             
             <div className="w-full rounded-3xl bg-black/40 border border-white/10 p-6 shadow-2xl backdrop-blur-xl mb-8">
               <p className="text-white/90 leading-relaxed text-pretty">
@@ -131,14 +165,14 @@ const MobileView = () => {
 
             <div className="grid grid-cols-2 gap-3 w-full">
               {[
-                { icon: MapPin, label: "Ubicación", val: "San Juan, ARG", color: "blue" },
-                { icon: Briefcase, label: "Experiencia", val: "+1 Año", color: "green" },
-                { icon: GraduationCap, label: "Estudios", val: "Tec. Univ.", color: "purple" },
-                { icon: Mail, label: "Estado", val: "Disponible", color: "red" }
+                { icon: MapPin, label: locationLabel, val: getTranslation(language, "locationValue"), color: "blue" },
+                { icon: Briefcase, label: experienceLabel, val: experienceValue, color: "green" },
+                { icon: GraduationCap, label: studiesLabel, val: studiesValue, color: "purple" },
+                { icon: Mail, label: statusLabel, val: statusValue, color: "red" }
               ].map((item, i) => (
                 <div key={i} className="flex flex-col items-center gap-2 p-4 rounded-2xl bg-black/40 border border-white/10 backdrop-blur-xl shadow-lg">
-                  <div className={`p-2.5 bg-${item.color}-500/20 rounded-xl`}>
-                    <item.icon className={`text-${item.color}-400 w-6 h-6`} />
+                  <div className={`p-2.5 rounded-xl ${statColorClasses[item.color]}`}>
+                    <item.icon className={`${statColorClasses[item.color].split(' ').pop()} w-6 h-6`} />
                   </div>
                   <p className="text-[10px] uppercase tracking-widest text-white/50">{item.label}</p>
                   <p className="text-sm font-bold mt-0.5 text-white">{item.val}</p>
@@ -150,7 +184,7 @@ const MobileView = () => {
 
         {/* SECCIÓN HABILIDADES (A partir de aquí se revelan con scroll) */}
         <section id="mobile-skills" className="reveal-section scroll-mt-32">
-          <h2 className="text-2xl font-bold text-center mb-8 text-white">Habilidades</h2>
+          <h2 className="text-2xl font-bold text-center mb-8 text-white">{skillsTitle}</h2>
           <div className="grid grid-cols-1 gap-4">
             {techStack.map((category) => (
               <div key={category.category} className="rounded-3xl bg-black/40 border border-white/10 p-5 shadow-xl backdrop-blur-xl">
@@ -172,10 +206,10 @@ const MobileView = () => {
 
         {/* SECCIÓN PROYECTOS */}
         <section id="mobile-projects" className="reveal-section scroll-mt-32">
-          <h2 className="text-2xl font-bold text-center mb-8 text-white">Proyectos</h2>
+          <h2 className="text-2xl font-bold text-center mb-8 text-white">{projectsTitle}</h2>
           <div className="grid grid-cols-1 gap-8">
             {projects.map((project) => {
-              const projDesc = project.children?.find(child => child.fileType === 'txt')?.description?.[0] || 'Sin descripción...';
+              const projDesc = project.children?.find(child => child.fileType === 'txt')?.description?.[0] || getTranslation(language, "noDescription");
               const links = project.children?.filter(child => child.fileType === 'url') || [];
               const techTopics = getTechTopics(projDesc);
 
@@ -221,7 +255,7 @@ const MobileView = () => {
 
         {/* SECCIÓN CERTIFICADOS */}
         <section id="mobile-certificates" className="reveal-section scroll-mt-32">
-          <h2 className="text-2xl font-bold text-center mb-8 text-white">Certificados</h2>
+          <h2 className="text-2xl font-bold text-center mb-8 text-white">{certificatesTitle}</h2>
           <div className="grid grid-cols-1 gap-6">
             {certificates.map((cert) => (
               <article key={cert.id} className="rounded-3xl overflow-hidden bg-black/40 border border-white/10 shadow-xl backdrop-blur-xl flex flex-col">
@@ -235,7 +269,7 @@ const MobileView = () => {
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 text-sm text-blue-300 font-medium active:scale-95"
                   >
-                    Ver credencial <ExternalLink size={14} />
+                    {getTranslation(language, "viewCredential")} <ExternalLink size={14} />
                   </a>
                 </div>
               </article>
@@ -245,9 +279,9 @@ const MobileView = () => {
 
         {/* SECCIÓN CONTACTO */}
         <section id="mobile-contact" className="reveal-section scroll-mt-32">
-          <h2 className="text-2xl font-bold text-center mb-8 text-white">Contacto</h2>
+          <h2 className="text-2xl font-bold text-center mb-8 text-white">{contactTitle}</h2>
           <div className="rounded-3xl bg-black/40 border border-white/10 p-8 shadow-xl backdrop-blur-xl text-center">
-            <p className="text-white/80 mb-8 leading-relaxed">¿Tienes algún proyecto en mente o buscas un desarrollador? ¡Hablemos!</p>
+            <p className="text-white/80 mb-8 leading-relaxed">{getTranslation(language, 'contactPrompt')}</p>
             <div className="flex flex-col gap-4">
               {socials.map((social) => (
                 <a

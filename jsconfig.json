@@ -1,9 +1,10 @@
 {
-    "compilerOptions":{
-        "baseUrl": ".",
-        "paths": {
-            "#*": ["src/*"],
-            } 
-    },
-    "include": ["src"]
+  "compilerOptions": {
+    "baseUrl": ".",
+    "ignoreDeprecations": "6.0",
+    "paths": {
+      "#*": ["src/*"]
+    }
+  },
+  "include": ["src"]
 }
