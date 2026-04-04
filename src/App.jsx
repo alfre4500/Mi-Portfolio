@@ -1,8 +1,8 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useThemeStore } from "#store/theme.js";
 import gsap from "gsap";
 import { Draggable }  from "gsap/Draggable";
-import { Navbar, Welcome, Dock } from "#components";
+import { Navbar, Welcome, Dock, MobileView } from "#components";
 // 1. AGREGAMOS 'About' Y 'Archive' A LA IMPORTACIÓN
 import { Terminal, Safari, Resumen, Finder, About, Archive, Text, Image, Contact } from "#windows";
 
@@ -11,6 +11,13 @@ gsap.registerPlugin(Draggable);
 const App = () => {
   console.log('🔁 App render start');
   const theme = useThemeStore((state) => state.theme);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth <= 768);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   useEffect(() => {
     const root = document.documentElement;
@@ -22,6 +29,10 @@ const App = () => {
       root.classList.remove('dark');
     }
   }, [theme]);
+
+  if (isMobile) {
+    return <MobileView />;
+  }
 
   return (
     <main>

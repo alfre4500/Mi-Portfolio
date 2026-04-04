@@ -113,9 +113,11 @@ const Welcome = () => {
   const language = useLanguageStore((state) => state.language);
   const welcomeSubtitle = getTranslation(language, "welcomeSubtitle");
   const welcomeTitle = getTranslation(language, "welcomeTitle");
-  const desktopOnly = getTranslation(language, "desktopOnly");
 
   useGSAP(() => {
+    // Disable hover animations on mobile
+    if (window.innerWidth <= 768) return;
+
     const cleanupTitle = setupTextHover(titleRef.current, "title");
     const cleanupSubtitle = setupTextHover(subtitleRef.current, "subtitle");
 
@@ -127,17 +129,13 @@ const Welcome = () => {
 
   return (
     <section id="welcome" className="flex flex-col items-center justify-center h-screen">
-      <p ref={subtitleRef} className="cursor-default text-3xl font-georama">
+      <p ref={subtitleRef} className="cursor-default text-3xl md:text-4xl font-georama">
         {renderText(welcomeSubtitle, "", 100)}
       </p>
       
-      <h1 ref={titleRef} className="mt-7 cursor-default text-9xl italic font-georama">
+      <h1 ref={titleRef} className="mt-7 cursor-default text-6xl md:text-8xl lg:text-9xl italic font-georama">
         {renderText(welcomeTitle, "", 400)}
       </h1>
-
-      <div className="lg:hidden mt-10 text-center px-4">
-        <p>{desktopOnly}</p>
-      </div>
     </section>
   );
 };

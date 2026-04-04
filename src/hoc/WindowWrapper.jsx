@@ -25,11 +25,19 @@ const WindowWrapper = (Component, windowKey) => {
 
             if (isOpen) {
                 el.style.display = "block";
-                // Usamos fromTo para asegurar la entrada
-                gsap.fromTo(el, 
-                    { scale: 0.8, opacity: 0, y: 40 }, 
-                    { scale: 1, opacity: 1, y: 0, duration: 0.4, ease: "power3.out" }
-                );
+                if (window.innerWidth > 768) {
+                    // Full animation on desktop
+                    gsap.fromTo(el, 
+                        { scale: 0.8, opacity: 0, y: 40 }, 
+                        { scale: 1, opacity: 1, y: 0, duration: 0.4, ease: "power3.out" }
+                    );
+                } else {
+                    // Simple fade on mobile
+                    gsap.fromTo(el, 
+                        { opacity: 0 }, 
+                        { opacity: 1, duration: 0.2, ease: "power1.out" }
+                    );
+                }
             } else {
                 el.style.display = "none";
             }
@@ -38,6 +46,9 @@ const WindowWrapper = (Component, windowKey) => {
         // 4. Hook Draggable
         useGSAP(() => {
             if (!win || !ref.current || !isOpen) return;
+            
+            // Only enable dragging on screens wider than 768px
+            if (window.innerWidth <= 768) return;
             
             const dragInstance = Draggable.create(ref.current, {
                 type: "x,y",
