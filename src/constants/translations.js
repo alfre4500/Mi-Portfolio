@@ -110,7 +110,7 @@ export const translations = {
     viewCredential: "Ver credencial",
 
     // --- NUEVAS TRADUCCIONES PARA EL CV ---
-    resumeUrl: "/files/CV-ALFREDO-AGUERO.pdf", 
+    resumeUrl: "/files/Alfredo.Aguero.CV.pdf", 
     resumeTitle: "Mi Currículum",
   },
 
@@ -225,7 +225,7 @@ export const translations = {
     viewCredential: "View credential",
 
     // --- NUEVAS TRADUCCIONES PARA EL CV ---
-    resumeUrl: "/files/ALFREDO-AGUERO-RESUME.pdf",
+    resumeUrl: "/files/Alfredo.Aguero.Resume.pdf",
     resumeTitle: "My Resume",
   },
 };
