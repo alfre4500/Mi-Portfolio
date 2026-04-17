@@ -223,7 +223,7 @@ const TRASH_LOCATION = {
       kind: "file",
       fileType: "pdf",
       description: ["Descarga mi CV en PDF."],
-      href: "/files/CV-ALFREDO-AGUERO.PDF",
+      href: "/files/CV-ALFREDO-AGUERO.PDF?v=2",
     },
     {
       id: "doc-certificates",
