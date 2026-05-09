@@ -115,6 +115,18 @@ const Welcome = () => {
   const welcomeTitle = getTranslation(language, "welcomeTitle");
 
   useGSAP(() => {
+    // --- NUEVO: SECUENCIA DE ARRANQUE (Entrada del texto) ---
+    // Anima el subtítulo y el título en secuencia (stagger)
+    gsap.from([subtitleRef.current, titleRef.current], {
+      y: 40,
+      opacity: 0,
+      duration: 1.2,
+      stagger: 0.3, // El título aparece 0.3s después del subtítulo
+      ease: "power3.out",
+      delay: 0.2 // Pequeña pausa al inicio de cargar la web
+    });
+    // ---------------------------------------------------------
+
     // Disable hover animations on mobile
     if (window.innerWidth <= 768) return;
 
